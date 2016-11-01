@@ -2,9 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'AndroidKey'
+            keyPassword 'sembarang'
+            storeFile file('D:/Sekolah/ProjectAndroid/key.jks')
+            storePassword 'sembarang'
+        }
+    }
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
-
     defaultConfig {
         applicationId "id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby"
         minSdkVersion 15
@@ -17,6 +24,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     dexOptions {
