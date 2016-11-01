@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'AndroidKey'
             keyPassword 'sembarang'
-            storeFile file('D:/Sekolah/ProjectAndroid/key.jks')
+            storeFile file('./apikey/key.jks')
             storePassword 'sembarang'
         }
     }
