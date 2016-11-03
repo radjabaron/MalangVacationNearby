@@ -69,12 +69,8 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-//        LatLng latLng = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(latLng).draggable(true));
         LatLng latLng = new LatLng(-7.977205, 112.658870);
         mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in Moklet"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 //        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
 //            @Override
 //            public void onMyLocationChange(Location location) {

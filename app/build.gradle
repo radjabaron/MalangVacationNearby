@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'AndroidKey'
             keyPassword 'sembarang'
-            storeFile file('./apikey/key.jks')
+            storeFile file('../apikey/key.jks')
             storePassword 'sembarang'
         }
     }
@@ -32,6 +32,19 @@ android {
     dexOptions {
         javaMaxHeapSize "4g"
     }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
 }
 
 dependencies {
@@ -42,6 +55,5 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.google.code.findbugs:jsr305:2.0.1'
     testCompile 'junit:junit:4.12'
-    compile project(path: ':backend', configuration: 'android-endpoints')
     compile 'com.firebase:firebase-client-android:2.5.2'
 }

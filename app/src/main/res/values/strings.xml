@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">MalangVacationNearby</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDSE_Gp3EywZsbYlFGqbmZsN8FAxbxZQ9c</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDX_IeTEMTNsMNetR4dkIaIuwnc3kujA5o</string>
 </resources>
