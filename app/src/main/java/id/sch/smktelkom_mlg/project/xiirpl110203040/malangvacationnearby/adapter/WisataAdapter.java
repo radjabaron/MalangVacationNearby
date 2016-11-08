@@ -34,7 +34,7 @@ public class WisataAdapter extends RecyclerView.Adapter<WisataAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Wisata wisata = wisataList.get(position);
-        holder.tvNamaWisata.setText(wisataList.get(position).getNamaWisata());
+        holder.tvNamaWisata.setText(wisata.getNamaWisata());
     }
 
     @Override
