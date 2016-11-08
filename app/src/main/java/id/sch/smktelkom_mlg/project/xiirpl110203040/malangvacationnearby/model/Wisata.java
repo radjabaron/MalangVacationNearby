@@ -10,4 +10,13 @@ public class Wisata {
     public Wisata(String namaWisata){
         this.namaWisata = namaWisata;
     }
+
+    public String getNamaWisata() {
+        return namaWisata;
+    }
+
+    public void setNamaWisata(String namaWisata) {
+        this.namaWisata = namaWisata;
+    }
+
 }

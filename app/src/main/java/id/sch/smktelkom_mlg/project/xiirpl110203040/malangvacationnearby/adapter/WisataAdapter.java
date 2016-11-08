@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.R;
 import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.model.Wisata;
@@ -16,7 +17,7 @@ import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.model.W
  */
 
 public class WisataAdapter extends RecyclerView.Adapter<WisataAdapter.ViewHolder>{
-    ArrayList<Wisata> wisataList;
+    List<Wisata> wisataList;
     String namaWisata;
 
     public WisataAdapter(ArrayList wisataList) {
@@ -33,7 +34,7 @@ public class WisataAdapter extends RecyclerView.Adapter<WisataAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Wisata wisata = wisataList.get(position);
-        holder.tvNamaWisata.setText(wisata.namaWisata);
+        holder.tvNamaWisata.setText(wisataList.get(position).getNamaWisata());
     }
 
     @Override

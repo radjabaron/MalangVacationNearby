@@ -1,17 +1,22 @@
 package id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby;
 
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -20,11 +25,13 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
+
+import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.adapter.WisataAdapter;
+import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.model.Wisata;
 
 public class MainActivity extends FragmentActivity implements
         OnMapReadyCallback,
@@ -32,6 +39,10 @@ public class MainActivity extends FragmentActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
+    RecyclerView rvWisata;
+    ArrayList<Wisata> wisataList = new ArrayList<>();
+    WisataAdapter wisataAdapter;
+    TextView tvNamaWisata;
     private GoogleMap mMap;
     private GoogleApiClient googleApiClient;
     private Location mCurrentLocation;
@@ -42,6 +53,7 @@ public class MainActivity extends FragmentActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Firebase.setAndroidContext(this);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -52,7 +64,35 @@ public class MainActivity extends FragmentActivity implements
                 .build();
 
 
+        rvWisata = (RecyclerView) findViewById(R.id.rvWisata);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rvWisata.setLayoutManager(layoutManager);
+        initializeData();
+        wisataAdapter = new WisataAdapter(wisataList);
+        rvWisata.setAdapter(wisataAdapter);
+
+
     }
+
+    private void initializeData() {
+        Firebase mRef = new Firebase("https://malang-vacation-nearby-3b8b3.firebaseio.com/wisata");
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                wisataList.clear();
+                for (DataSnapshot dataSnapshots : dataSnapshot.getChildren()) {
+                    String namaWisata = dataSnapshots.getKey();
+                    wisataList.add(new Wisata(namaWisata));
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+    }
+
 
     @Override
     protected void onStart() {
@@ -71,19 +111,6 @@ public class MainActivity extends FragmentActivity implements
         mMap = googleMap;
         LatLng latLng = new LatLng(-7.977205, 112.658870);
         mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in Moklet"));
-//        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
-//            @Override
-//            public void onMyLocationChange(Location location) {
-//                mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
-//            }
-//        });
-//
-//        Circle circle = mMap.addCircle(new CircleOptions()
-//                .center(new LatLng(-7.977205, 112.658870))
-//                .radius(1000)
-//                .strokeColor(Color.BLUE)
-//                .fillColor(Color.TRANSPARENT));
-
     }
 
     @Override
