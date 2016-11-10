@@ -84,6 +84,7 @@ public class MainActivity extends FragmentActivity implements
                     String namaWisata = dataSnapshots.getKey();
                     wisataList.add(new Wisata(namaWisata));
                 }
+                wisataAdapter.notifyDataSetChanged();
             }
 
             @Override
