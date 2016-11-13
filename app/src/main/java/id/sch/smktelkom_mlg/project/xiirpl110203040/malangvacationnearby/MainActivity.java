@@ -17,6 +17,11 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.firebase.client.ChildEventListener;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -29,6 +34,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.adapter.WisataAdapter;
 import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.model.Wisata;
@@ -39,15 +45,14 @@ public class MainActivity extends FragmentActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
-    RecyclerView rvWisata;
-    ArrayList<Wisata> wisataList = new ArrayList<>();
-    WisataAdapter wisataAdapter;
-    TextView tvNamaWisata;
     private GoogleMap mMap;
     private GoogleApiClient googleApiClient;
     private Location mCurrentLocation;
     private double longitude;
     private double latitude;
+    RecyclerView rvWisata;
+    ArrayList<Wisata> wisataList = new ArrayList<>();
+    WisataAdapter wisataAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +115,27 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng latLng = new LatLng(-7.977205, 112.658870);
-        mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in Moklet"));
+        /*LatLng latLng = new LatLng(-7.977205, 112.658870);
+        mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in Moklet"));*/
+
+        Firebase mRef = new Firebase("https://malang-vacation-nearby-3b8b3.firebaseio.com/wisata");
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshots : dataSnapshot.getChildren()){
+                    Map<String, Double> map = dataSnapshots.getValue(Map.class);
+                    longitude = map.get("longitude");
+                    latitude = map.get("latitude");
+                    LatLng latLng = new LatLng(latitude, longitude);
+                    mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + map.get("nama")));
+                }
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -139,7 +163,6 @@ public class MainActivity extends FragmentActivity implements
         if(location != null){
             longitude = location.getLongitude();
             latitude = location.getLatitude();
-
             moveMap();
         }
     }
@@ -154,7 +177,7 @@ public class MainActivity extends FragmentActivity implements
         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
