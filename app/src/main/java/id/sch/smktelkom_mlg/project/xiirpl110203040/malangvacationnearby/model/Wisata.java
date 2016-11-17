@@ -12,6 +12,7 @@ public class Wisata {
     public String jamWisata;
     public String deskripsiWisata;
     public String telpWisata;
+    public String imgUrl;
 
     public Wisata(String namaWisata){
         this.namaWisata = namaWisata;
@@ -71,5 +72,13 @@ public class Wisata {
 
     public void setTelpWisata(String telpWisata) {
         this.telpWisata = telpWisata;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

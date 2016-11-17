@@ -8,7 +8,7 @@ import com.squareup.picasso.Picasso;
 import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.R;
 
 /**
- * Created by LittleFireflies on 11-Nov-16.
+ * Created by Nadiawo on 17/11/2016.
  */
 
 public class PicassoClient {

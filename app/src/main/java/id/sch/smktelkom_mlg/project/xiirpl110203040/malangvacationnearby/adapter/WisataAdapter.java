@@ -41,7 +41,6 @@ public class WisataAdapter extends RecyclerView.Adapter<WisataAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Wisata wisata = wisataList.get(position);
         holder.tvNamaWisata.setText(wisata.getNamaWisata());
-
         holder.llWisata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
