@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cvTaxi"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvNomorTaxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tvNamaTaxi"
+            android:layout_alignStart="@+id/tvNamaTaxi"
+            android:layout_below="@+id/tvNamaTaxi"
+            android:layout_marginTop="12dp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvNamaTaxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="19dp"
+            android:text="TextView" />
+
+        <ImageButton
+            android:id="@+id/btnCallTaxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="26dp"
+            android:layout_marginRight="26dp"
+            app:srcCompat="@drawable/ic_call_black_24dp" />
+
+    </RelativeLayout>
+
+
+</android.support.v7.widget.CardView>
