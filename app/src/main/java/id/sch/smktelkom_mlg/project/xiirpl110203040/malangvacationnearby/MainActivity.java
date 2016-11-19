@@ -122,12 +122,14 @@ public class MainActivity extends FragmentActivity implements
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                TextView tvNoConnection = (TextView)findViewById(R.id.tvNoConnection);
+                tvNoConnection.setVisibility(View.GONE);
                 for(DataSnapshot dataSnapshots : dataSnapshot.getChildren()){
                     Map<String, Double> map = dataSnapshots.getValue(Map.class);
                     longitude = map.get("longitude");
                     latitude = map.get("latitude");
                     LatLng latLng = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(latLng).title("Marker in " + map.get("nama")));
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(String.valueOf(map.get("nama"))));
                 }
             }
 
@@ -149,35 +151,23 @@ public class MainActivity extends FragmentActivity implements
     }
 
     private void getCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
+        mMap.setMyLocationEnabled(true);
         Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         if(location != null){
             longitude = location.getLongitude();
             latitude = location.getLatitude();
-            moveMap();
+            LatLng latLng = new LatLng(latitude, longitude);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        } else {
+            LatLng latLng = new LatLng(-7.966697, 112.632509);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         }
     }
 
     private void moveMap() {
-        String msg = latitude + ", " + longitude;
-        LatLng latLng = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions()
-        .position(latLng)
-        .draggable(true)
-        .title("Current Location")
-        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        //Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+
     }
 
     @Override
