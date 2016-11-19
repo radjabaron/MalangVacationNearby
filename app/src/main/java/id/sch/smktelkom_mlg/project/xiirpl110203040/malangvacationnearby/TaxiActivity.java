@@ -25,7 +25,7 @@ public class TaxiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taxi);
-
+        Firebase.setAndroidContext(this);
         rvTaxi = (RecyclerView) findViewById(R.id.rvTaxi);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvTaxi.setLayoutManager(layoutManager);

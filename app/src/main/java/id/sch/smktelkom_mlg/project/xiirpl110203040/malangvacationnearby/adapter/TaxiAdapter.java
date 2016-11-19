@@ -47,7 +47,7 @@ public class TaxiAdapter extends RecyclerView.Adapter<TaxiAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse(holder.tvNomorTaxi.getText().toString()));
+                intent.setData(Uri.parse("tel:"+holder.tvNomorTaxi.getText().toString()));
                 ctx.startActivity(intent);
             }
         });
