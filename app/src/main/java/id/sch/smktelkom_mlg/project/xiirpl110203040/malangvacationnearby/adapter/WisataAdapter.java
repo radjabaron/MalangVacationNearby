@@ -41,6 +41,7 @@ public class WisataAdapter extends RecyclerView.Adapter<WisataAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Wisata wisata = wisataList.get(position);
         holder.tvNamaWisata.setText(wisata.getNamaWisata());
+        holder.tvDistance.setText(String.valueOf(wisata.getDistance()));
         holder.llWisata.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +60,7 @@ public class WisataAdapter extends RecyclerView.Adapter<WisataAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNamaWisata;
+        TextView tvNamaWisata, tvDistance;
         LinearLayout llWisata;
 
         public ViewHolder(View itemView) {
@@ -67,6 +68,7 @@ public class WisataAdapter extends RecyclerView.Adapter<WisataAdapter.ViewHolder
             ctx = itemView.getContext();
             tvNamaWisata = (TextView) itemView.findViewById(R.id.tvNamaWisata);
             llWisata = (LinearLayout) itemView.findViewById(R.id.llWisata);
+            tvDistance = (TextView) itemView.findViewById(R.id.tvDistance);
         }
     }
 }
