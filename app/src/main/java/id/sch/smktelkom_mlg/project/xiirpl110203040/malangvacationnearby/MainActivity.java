@@ -119,10 +119,15 @@ public class MainActivity extends FragmentActivity implements
                 tvNoConnection.setVisibility(View.GONE);
                 for (DataSnapshot dataSnapshots : dataSnapshot.getChildren()) {
                     Map<String, Double> map = dataSnapshots.getValue(Map.class);
-                    longitude = map.get("longitude");
-                    latitude = map.get("latitude");
-                    LatLng latLng = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(String.valueOf(map.get("nama"))));
+                    try{
+                        longitude = map.get("longitude");
+                        latitude = map.get("latitude");
+                        LatLng latLng = new LatLng(latitude, longitude);
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(String.valueOf(map.get("nama"))));
+                    } catch (Exception e){
+                        continue;
+                    }
+
                 }
             }
 
