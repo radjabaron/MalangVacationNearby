@@ -73,14 +73,30 @@ public class MainActivity extends FragmentActivity implements
     }
 
     private void initializeData() {
-        Firebase mRef = new Firebase("https://malang-vacation-nearby-3b8b3.firebaseio.com/wisata");
+        final Firebase mRef = new Firebase("https://malang-vacation-nearby-3b8b3.firebaseio.com/wisata");
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 wisataList.clear();
                 for (DataSnapshot dataSnapshots : dataSnapshot.getChildren()) {
+                    int distance = 0;
+                    Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+                    Location locationFrom = new Location("From");
+                    Location locationTo = new Location("To");
+                    if(location != null){
+                        Map<String, Double> map = dataSnapshots.getValue(Map.class);
+
+                        locationFrom.setLatitude(location.getLatitude());
+                        locationFrom.setLongitude(location.getLongitude());
+
+                        locationTo.setLatitude(map.get("latitude"));
+                        locationTo.setLongitude(map.get("longitude"));
+                        distance = ((int) locationFrom.distanceTo(locationTo))/1000;
+
+                        mRef.child(dataSnapshots.getKey()+"/distance").setValue(distance);
+                    }
                     String namaWisata = dataSnapshots.getKey();
-                    wisataList.add(new Wisata(namaWisata));
+                    wisataList.add(new Wisata(namaWisata, distance));
                 }
                 wisataAdapter.notifyDataSetChanged();
             }

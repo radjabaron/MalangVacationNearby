@@ -13,9 +13,11 @@ public class Wisata {
     public String deskripsiWisata;
     public String telpWisata;
     public String imgUrl;
+    public int distance;
 
-    public Wisata(String namaWisata){
+    public Wisata(String namaWisata, int distance){
         this.namaWisata = namaWisata;
+        this.distance = distance;
     }
 
     public String getNamaWisata() {
@@ -80,5 +82,13 @@ public class Wisata {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public int getDistance() {
+        return distance;
+    }
+
+    public void setDistance(int distance) {
+        this.distance = distance;
     }
 }
