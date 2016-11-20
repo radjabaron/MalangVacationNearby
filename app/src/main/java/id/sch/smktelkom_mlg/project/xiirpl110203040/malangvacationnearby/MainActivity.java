@@ -11,13 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
@@ -29,7 +23,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -45,14 +38,14 @@ public class MainActivity extends FragmentActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
+    RecyclerView rvWisata;
+    ArrayList<Wisata> wisataList = new ArrayList<>();
+    WisataAdapter wisataAdapter;
     private GoogleMap mMap;
     private GoogleApiClient googleApiClient;
     private Location mCurrentLocation;
     private double longitude;
     private double latitude;
-    RecyclerView rvWisata;
-    ArrayList<Wisata> wisataList = new ArrayList<>();
-    WisataAdapter wisataAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,14 +115,19 @@ public class MainActivity extends FragmentActivity implements
         mRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                TextView tvNoConnection = (TextView)findViewById(R.id.tvNoConnection);
+                TextView tvNoConnection = (TextView) findViewById(R.id.tvNoConnection);
                 tvNoConnection.setVisibility(View.GONE);
-                for(DataSnapshot dataSnapshots : dataSnapshot.getChildren()){
+                for (DataSnapshot dataSnapshots : dataSnapshot.getChildren()) {
                     Map<String, Double> map = dataSnapshots.getValue(Map.class);
-                    longitude = map.get("longitude");
-                    latitude = map.get("latitude");
-                    LatLng latLng = new LatLng(latitude, longitude);
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(String.valueOf(map.get("nama"))));
+                    try{
+                        longitude = map.get("longitude");
+                        latitude = map.get("latitude");
+                        LatLng latLng = new LatLng(latitude, longitude);
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(String.valueOf(map.get("nama"))));
+                    } catch (Exception e){
+                        continue;
+                    }
+
                 }
             }
 
@@ -152,6 +150,16 @@ public class MainActivity extends FragmentActivity implements
 
     private void getCurrentLocation() {
         mMap.setMyLocationEnabled(true);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         if(location != null){
             longitude = location.getLongitude();

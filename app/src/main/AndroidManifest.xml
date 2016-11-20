@@ -13,7 +13,7 @@
     <application
         android:name="android.support.multidex.MultiDexApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/iconmlg"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -34,11 +34,11 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"
+            android:label="Malang Tourism Place"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
         <activity
             android:name=".TaxiActivity"
-            android:label="@string/title_activity_detail"></activity>
+            android:label="Taxi's List"></activity>
     </application>
 
 </manifest>

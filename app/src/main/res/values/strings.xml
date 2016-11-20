@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MalangVacationNearby</string>
+    <string name="app_name">Malang Vacation Nearby</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyA6JQBaeFf6el_ksu4ha6NwaVwwUO6Zr-o</string>
     <string name="title_activity_detail">DetailActivity</string>
 </resources>

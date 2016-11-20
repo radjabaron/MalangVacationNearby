@@ -17,8 +17,10 @@
             android:layout_alignLeft="@+id/tvNamaTaxi"
             android:layout_alignStart="@+id/tvNamaTaxi"
             android:layout_below="@+id/tvNamaTaxi"
-            android:layout_marginTop="12dp"
-            android:text="TextView" />
+            android:layout_marginBottom="14dp"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/tvNamaTaxi"
@@ -29,18 +31,21 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="30dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="19dp"
-            android:text="TextView" />
+            android:layout_marginTop="14dp"
+            android:text="TextView"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp" />
 
         <ImageButton
             android:id="@+id/btnCallTaxi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="26dp"
             android:layout_marginRight="26dp"
+            android:background="@drawable/buttonblue"
             app:srcCompat="@drawable/ic_call_black_24dp" />
 
     </RelativeLayout>
