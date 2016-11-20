@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
             android:textColor="@android:color/black"
             android:textSize="25sp"
             tools:text="Nama Wisata" />
@@ -150,6 +151,7 @@
                 android:id="@+id/textViewWannaGoThere"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="Wanna Go There?"
                 android:textColor="@android:color/black"
@@ -158,6 +160,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="1">
@@ -166,13 +169,16 @@
                     android:id="@+id/btnOpenTaxi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="CALL A TAXI" />
+                    android:layout_marginRight="5dp"
+                    android:background="#FFFFFF"
+                    android:text=" CALL A TAXI " />
 
                 <Button
                     android:id="@+id/btnOpenMaps"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OPEN THE ROUTE" />
+                    android:background="#FFFFFF"
+                    android:text=" OPEN THE ROUTE " />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
