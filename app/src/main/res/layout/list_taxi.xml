@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cvTaxi"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -8,6 +7,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#87CEFA"
         android:orientation="horizontal">
 
         <TextView
@@ -36,7 +36,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textSize="20sp" />
 
-        <ImageButton
+        <Button
             android:id="@+id/btnCallTaxi"
             android:layout_width="70dp"
             android:layout_height="40dp"
@@ -45,8 +45,9 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="26dp"
             android:layout_marginRight="26dp"
-            android:background="@drawable/buttonblue"
-            app:srcCompat="@drawable/ic_call_black_24dp" />
+            android:background="#FFFFFF"
+            android:drawableLeft="@drawable/ic_call_black_24dp"
+            android:text=" CALL " />
 
     </RelativeLayout>
 

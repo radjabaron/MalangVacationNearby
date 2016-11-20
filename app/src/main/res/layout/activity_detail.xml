@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1E90FF"
     android:fitsSystemWindows="true"
     tools:context="id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.DetailActivity">
 
@@ -29,8 +30,8 @@
 
             <ImageView
                 android:id="@+id/ivWisata"
-                android:layout_width="match_parent"
-                android:layout_height="256dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/load"

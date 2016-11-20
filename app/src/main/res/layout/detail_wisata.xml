@@ -170,14 +170,14 @@
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
-                    android:background="@drawable/buttonblue"
+                    android:background="#FFFFFF"
                     android:text="CALL A TAXI" />
 
                 <Button
                     android:id="@+id/btnOpenMaps"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/buttonblue"
+                    android:background="#FFFFFF"
                     android:text="OPEN THE ROUTE" />
             </LinearLayout>
         </LinearLayout>

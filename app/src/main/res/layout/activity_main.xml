@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1E90FF"
     android:orientation="vertical"
     android:weightSum="1"
     tools:context="id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.MainActivity">
@@ -12,14 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.6" />
+
     <TextView
         android:id="@+id/tvNoConnection"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nothing to Display. Please check your connection."
+        android:layout_marginTop="10dp"
         android:gravity="center"
+        android:text="Nothing to Display. Please check your connection."
+        android:textColor="#FFFFFF"
         android:textSize="20sp"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvWisata"
         android:layout_width="match_parent"
