@@ -5,8 +5,10 @@
     android:layout_height="match_parent"
     android:background="#00BFFF"
     android:orientation="vertical"
+    android:padding="10dp"
     android:weightSum="1"
     tools:context="id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.MainActivity">
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
