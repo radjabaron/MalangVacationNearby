@@ -14,25 +14,21 @@ Cara kerja aplikasi :
 •	Tombol Open The Route akan membawa kita untuk membuka halaman maps dan akan berdestinasi pada wisata yang kita buka. Jika memilih misal Alun-Alun Kota Malang, dan kita memencet Open The Route, maka destinasi akan berada di Alun-Alun Malang, dengan titik keberangkatan pada tempat dimana kita saat itu.
 
 
-![MVN1](https://docs.google.com/uc?id=0B8F0kBmh24G9cEpRcEdIS0ZkUVE)
+![MVN1](https://docs.google.com/uc?id=0B8F0kBmh24G9Nm02anJKbVc1bTA)
 
-![MVN2](https://docs.google.com/uc?id=0B8F0kBmh24G9OGVSalY3R0NRYTg)
+![MVN2](https://docs.google.com/uc?id=0B8F0kBmh24G9dzdXMzQ4VFRhMW8)
 
-![MVN3](https://docs.google.com/uc?id=0B8F0kBmh24G9YzdtaWIxUXpva28)
+![MVN3](https://docs.google.com/uc?id=0B8F0kBmh24G9VTgzcDNaWC01SWc)
 
-![MVN4](https://docs.google.com/uc?id=0B8F0kBmh24G9N2pmOUFLNnB2OFk)
+![MVN4](https://docs.google.com/uc?id=0B8F0kBmh24G9elhPX0RHd2tTaUE)
 
-![MVN5](https://docs.google.com/uc?id=0B8F0kBmh24G9M0NlMml1bjBKSDA)
+![MVN5](https://docs.google.com/uc?id=0B8F0kBmh24G9QVlDbGFrdER6cEE)
 
-![MVN6](https://docs.google.com/uc?id=0B8F0kBmh24G9LWc5OFR2NlNYU28)
+![MVN6](https://docs.google.com/uc?id=0B8F0kBmh24G9anh3ZElPc0VmXzg)
 
-![MVN7](https://docs.google.com/uc?id=0B8F0kBmh24G9R05mMXMwUmdKaEk)
+Link video : [Malang Vacation Nearby’s Video](https://drive.google.com/open?id=0B8F0kBmh24G9WHJQZGlZOHFiV1k)
 
-![MVN8](https://docs.google.com/uc?id=0B8F0kBmh24G9U0RNM1lYNkpZTlk)
-
-Link video : [Malang Vacation Nearby’s Video](https://drive.google.com/open?id=0B8F0kBmh24G9cTJvcUVZOEktOGM)
-
-Link apk : [Malang Vacation Nearby](https://drive.google.com/open?id=0B8F0kBmh24G9UUhOdTNXa0t5MEk)
+Link apk : [Malang Vacation Nearby](https://drive.google.com/open?id=0B8F0kBmh24G9dlBuT3hKYm9peG8)
 
 
 Anggota :
