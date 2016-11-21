@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class TaxiAdapter extends RecyclerView.Adapter<TaxiAdapter.ViewHolder> {
         holder.btnCallTaxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Intent intent = new Intent(Intent.ACTION_CALL);
                 intent.setData(Uri.parse("tel:"+holder.tvNomorTaxi.getText().toString()));
                 ctx.startActivity(intent);
             }
@@ -63,7 +63,7 @@ public class TaxiAdapter extends RecyclerView.Adapter<TaxiAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNamaTaxi;
         TextView tvNomorTaxi;
-        Button btnCallTaxi;
+        ImageButton btnCallTaxi;
         CardView cvTaxi;
 
         public ViewHolder(View itemView) {
@@ -71,7 +71,7 @@ public class TaxiAdapter extends RecyclerView.Adapter<TaxiAdapter.ViewHolder> {
             ctx = itemView.getContext();
             tvNamaTaxi = (TextView) itemView.findViewById(R.id.tvNamaTaxi);
             tvNomorTaxi = (TextView) itemView.findViewById(R.id.tvNomorTaxi);
-            btnCallTaxi = (Button) itemView.findViewById(R.id.btnCallTaxi);
+            btnCallTaxi = (ImageButton) itemView.findViewById(R.id.btnCallTaxi);
             cvTaxi = (CardView) itemView.findViewById(R.id.cvTaxi);
         }
     }
