@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cvTaxi"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,7 +21,7 @@
             android:layout_marginBottom="14dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="@android:color/holo_blue_dark" />
 
         <TextView
             android:id="@+id/tvNamaTaxi"
@@ -33,7 +34,7 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="14dp"
             android:text="TextView"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@android:color/black"
             android:textSize="20sp" />
 
         <ImageButton

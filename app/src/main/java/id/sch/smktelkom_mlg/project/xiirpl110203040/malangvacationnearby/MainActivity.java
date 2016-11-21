@@ -68,8 +68,6 @@ public class MainActivity extends FragmentActivity implements
         initializeData();
         wisataAdapter = new WisataAdapter(wisataList);
         rvWisata.setAdapter(wisataAdapter);
-
-
     }
 
     private void initializeData() {
@@ -79,12 +77,12 @@ public class MainActivity extends FragmentActivity implements
             public void onDataChange(DataSnapshot dataSnapshot) {
                 wisataList.clear();
                 for (DataSnapshot dataSnapshots : dataSnapshot.getChildren()) {
+                    Map<String, Double> map = dataSnapshots.getValue(Map.class);
                     int distance = 0;
                     Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
                     Location locationFrom = new Location("From");
                     Location locationTo = new Location("To");
                     if(location != null){
-                        Map<String, Double> map = dataSnapshots.getValue(Map.class);
 
                         locationFrom.setLatitude(location.getLatitude());
                         locationFrom.setLongitude(location.getLongitude());
@@ -108,11 +106,11 @@ public class MainActivity extends FragmentActivity implements
         });
     }
 
-
     @Override
     protected void onStart() {
         googleApiClient.connect();
         super.onStart();
+
     }
 
     @Override

@@ -138,14 +138,15 @@
                     android:text=":"
                     android:textColor="@android:color/black" />
 
-                <TextView
-                    android:id="@+id/tvDesc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textColor="@android:color/black" />
-
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="TextView"
+                android:textColor="@android:color/black" />
 
             <TextView
                 android:id="@+id/textViewWannaGoThere"
@@ -171,14 +172,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="15dp"
                     android:background="@drawable/buttonblue"
-                    android:text="CALL A TAXI" />
+                    android:text="CALL A TAXI"
+                    android:textColor="@android:color/white" />
 
                 <Button
                     android:id="@+id/btnOpenMaps"
                     android:layout_width="140dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/buttonblue"
-                    android:text="OPEN THE ROUTE" />
+                    android:text="OPEN THE ROUTE"
+                    android:textColor="@android:color/white" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
