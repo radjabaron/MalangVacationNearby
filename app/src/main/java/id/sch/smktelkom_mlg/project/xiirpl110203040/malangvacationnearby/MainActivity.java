@@ -90,8 +90,6 @@ public class MainActivity extends FragmentActivity implements
                         locationTo.setLatitude(map.get("latitude"));
                         locationTo.setLongitude(map.get("longitude"));
                         distance = ((int) locationFrom.distanceTo(locationTo))/1000;
-
-                        mRef.child(dataSnapshots.getKey()+"/distance").setValue(distance);
                     }
                     String namaWisata = dataSnapshots.getKey();
                     wisataList.add(new Wisata(namaWisata, distance));
