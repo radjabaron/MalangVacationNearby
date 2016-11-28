@@ -46,6 +46,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Firebase.setAndroidContext(this);
         ref = new Firebase("https://malang-vacation-nearby-3b8b3.firebaseio.com/wisata/" + getIntent().getStringExtra(WisataAdapter.JUDUL));
@@ -68,6 +69,7 @@ public class DetailActivity extends AppCompatActivity {
                 tvJam.setText(map.get("jam"));
                 tvDesc.setText(map.get("desc"));
                 PicassoClient.downloadImage(getApplicationContext(), map.get("img_url"), ivWisata);
+                //ivWisata.loadUrl("file:///android_asset/ellipsis.gif");
 
                 Map<String, Double> mapLatLng = dataSnapshot.getValue(Map.class);
                 latitude = String.valueOf(mapLatLng.get("latitude"));
@@ -105,6 +107,13 @@ public class DetailActivity extends AppCompatActivity {
                     Toast.makeText(DetailActivity.this, "Google Maps Belum Terinstal. Install Terlebih dahulu.",
                             Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
     }
