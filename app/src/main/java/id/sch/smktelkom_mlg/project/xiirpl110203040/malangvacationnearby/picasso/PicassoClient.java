@@ -14,9 +14,9 @@ import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.R;
 public class PicassoClient {
     public static void downloadImage(Context ctx, String url, ImageView ivWisata){
         if(url != null && url.length()>0){
-            Picasso.with(ctx).load(url).placeholder(R.drawable.load).into(ivWisata);
+            Picasso.with(ctx).load(url).placeholder(R.drawable.pleasewait).into(ivWisata);
         } else {
-            Picasso.with(ctx).load(R.drawable.load).into(ivWisata);
+            Picasso.with(ctx).load(R.drawable.pleasewait).into(ivWisata);
         }
     }
 }
