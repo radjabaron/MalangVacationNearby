@@ -1,14 +1,14 @@
 package id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby;
 
-import android.content.pm.PackageManager;
+import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +18,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,19 +35,28 @@ import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.adapter
 import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.model.Wisata;
 
 public class MainActivity extends FragmentActivity implements
+        LocationListener,
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+        GoogleApiClient.OnConnectionFailedListener {
 
+    public static final String TAG = MainActivity.class.getSimpleName();
+    public static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+    private static GoogleMap mMap;
     RecyclerView rvWisata;
     ArrayList<Wisata> wisataList = new ArrayList<>();
     WisataAdapter wisataAdapter;
-    private GoogleMap mMap;
+    Location location;
     private GoogleApiClient googleApiClient;
+    private LocationRequest locationRequest;
     private Location mCurrentLocation;
     private double longitude;
     private double latitude;
+
+    public static void animate(double latitude, double longitude) {
+        LatLng latLng = new LatLng(latitude, longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +72,16 @@ public class MainActivity extends FragmentActivity implements
                 .addApi(LocationServices.API)
                 .build();
 
+        locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * 1000)        // 10 seconds, in milliseconds
+                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+
 
         rvWisata = (RecyclerView) findViewById(R.id.rvWisata);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvWisata.setLayoutManager(layoutManager);
-        initializeData();
+
         wisataAdapter = new WisataAdapter(wisataList);
         rvWisata.setAdapter(wisataAdapter);
     }
@@ -79,21 +95,25 @@ public class MainActivity extends FragmentActivity implements
                 for (DataSnapshot dataSnapshots : dataSnapshot.getChildren()) {
                     Map<String, Double> map = dataSnapshots.getValue(Map.class);
                     int distance = 0;
-                    Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+                    location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
                     Location locationFrom = new Location("From");
                     Location locationTo = new Location("To");
                     if(location != null){
 
+                        Log.d("LOCATION", String.valueOf(location.getLatitude()));
+                        Log.d("LOCATION", String.valueOf(location.getLongitude()));
                         locationFrom.setLatitude(location.getLatitude());
                         locationFrom.setLongitude(location.getLongitude());
 
                         locationTo.setLatitude(map.get("latitude"));
                         locationTo.setLongitude(map.get("longitude"));
-                        distance = ((int) locationFrom.distanceTo(locationTo))/1000;
+
                     }
+                    distance = ((int) locationFrom.distanceTo(locationTo)) / 1000;
                     String namaWisata = dataSnapshots.getKey();
                     wisataList.add(new Wisata(namaWisata, distance));
                 }
+                Log.d("LOCATION", "STOP");
                 wisataAdapter.notifyDataSetChanged();
             }
 
@@ -115,6 +135,21 @@ public class MainActivity extends FragmentActivity implements
     protected void onStop() {
         googleApiClient.disconnect();
         super.onStop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        googleApiClient.connect();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (googleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
+            googleApiClient.disconnect();
+        }
     }
 
     @Override
@@ -151,52 +186,52 @@ public class MainActivity extends FragmentActivity implements
     }
 
     @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
     public void onConnected(@Nullable Bundle bundle) {
-        getCurrentLocation();
+        Log.i(TAG, "Location services connected.");
+        location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        if (location == null) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+        } else {
+            initializeData();
+            getCurrentLocation();
+        }
     }
 
     private void getCurrentLocation() {
         mMap.setMyLocationEnabled(true);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Location location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-        if(location != null){
-            longitude = location.getLongitude();
-            latitude = location.getLatitude();
-            LatLng latLng = new LatLng(latitude, longitude);
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        } else {
-            LatLng latLng = new LatLng(-7.966697, 112.632509);
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        }
-    }
-
-    private void moveMap() {
-
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+//        LatLng latLng = new LatLng(-7.966697, 112.632509);
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        longitude = location.getLongitude();
+        latitude = location.getLatitude();
+        LatLng latLng = new LatLng(latitude, longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        Log.i(TAG, "Location services suspended. Please reconnect.");
     }
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        if (connectionResult.hasResolution()) {
+            try {
+                // Start an Activity that tries to resolve the error
+                connectionResult.startResolutionForResult(this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
+            } catch (IntentSender.SendIntentException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.i(TAG, "Location services connection failed with code " + connectionResult.getErrorCode());
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        getCurrentLocation();
     }
 }
