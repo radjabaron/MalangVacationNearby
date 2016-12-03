@@ -8,14 +8,22 @@
     android:weightSum="1"
     tools:context="id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.MainActivity">
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4" />
-
-    <TextView
+        android:layout_weight="0.4">
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/ivAbout"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/about_icon"/>
+    </RelativeLayout>
+        <TextView
         android:id="@+id/tvNoConnection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -35,11 +35,12 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".DetailActivity"
-            android:label=""
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:label="Malang Tourism Place"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".TaxiActivity"
-            android:label="Taxi's List"></activity>
+            android:label="Taxi&apos;s List" />
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

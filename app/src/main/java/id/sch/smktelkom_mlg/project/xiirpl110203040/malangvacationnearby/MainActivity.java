@@ -1,5 +1,6 @@
 package id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby;
 
+import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.client.DataSnapshot;
@@ -44,6 +46,7 @@ public class MainActivity extends FragmentActivity implements
     public static final String TAG = MainActivity.class.getSimpleName();
     public static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private static GoogleMap mMap;
+    ImageView ivAbout;
     RecyclerView rvWisata;
     ArrayList<Wisata> wisataList = new ArrayList<>();
     WisataAdapter wisataAdapter;
@@ -79,12 +82,20 @@ public class MainActivity extends FragmentActivity implements
                 .setFastestInterval(1 * 1000); // 1 second, in milliseconds
 
 
+        ivAbout = (ImageView) findViewById(R.id.ivAbout);
         rvWisata = (RecyclerView) findViewById(R.id.rvWisata);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvWisata.setLayoutManager(layoutManager);
 
         wisataAdapter = new WisataAdapter(wisataList);
         rvWisata.setAdapter(wisataAdapter);
+
+        ivAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+            }
+        });
     }
 
     private void initializeData() {
