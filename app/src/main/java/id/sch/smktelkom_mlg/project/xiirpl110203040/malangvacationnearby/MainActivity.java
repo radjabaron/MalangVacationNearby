@@ -25,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -170,7 +171,7 @@ public class MainActivity extends FragmentActivity implements
                         longitude = map.get("longitude");
                         latitude = map.get("latitude");
                         LatLng latLng = new LatLng(latitude, longitude);
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(String.valueOf(map.get("nama"))));
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(String.valueOf(map.get("nama"))).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_mvn3)));
                     } catch (Exception e){
                         continue;
                     }
