@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -94,7 +94,7 @@ public class WisataAdapter extends RecyclerView.Adapter<WisataAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNamaWisata, tvDistance;
         LinearLayout llWisata;
-        Button btnShowMarker;
+        ImageButton btnShowMarker;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -102,7 +102,7 @@ public class WisataAdapter extends RecyclerView.Adapter<WisataAdapter.ViewHolder
             tvNamaWisata = (TextView) itemView.findViewById(R.id.tvNamaWisata);
             llWisata = (LinearLayout) itemView.findViewById(R.id.llWisata);
             tvDistance = (TextView) itemView.findViewById(R.id.tvDistance);
-            btnShowMarker = (Button) itemView.findViewById(R.id.btnMarker);
+            btnShowMarker = (ImageButton) itemView.findViewById(R.id.btnMarker);
         }
     }
 }

@@ -3,11 +3,11 @@
     android:id="@+id/llWisata"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:layout_marginBottom="3dp"
-    android:background="@android:color/white"
-    android:orientation="horizontal"
-    android:weightSum="10">
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/bgbtn"
+    android:orientation="horizontal">
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,6 +17,8 @@
             android:id="@+id/tvNamaWisata"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:text="Nama Wisata"
             android:textColor="@android:color/black"
@@ -30,12 +32,16 @@
                 android:id="@+id/tvDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="x" />
+                android:layout_marginLeft="16dp"
+                android:text="x"
+                android:textColor="#1E90FF" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" km from your location" />
+                android:layout_marginBottom="10dp"
+                android:text=" km from your location"
+                android:textColor="#1E90FF" />
         </LinearLayout>
     </LinearLayout>
 
@@ -44,14 +50,13 @@
         android:layout_height="wrap_content"
         android:layout_weight="4">
 
-        <Button
+        <ImageButton
             android:id="@+id/btnMarker"
-            android:layout_width="120dp"
+            android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
             android:background="@drawable/buttonblue"
-            android:text="Where is it?"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white" />
+            android:src="@drawable/ic_place_black_24dp" />
     </RelativeLayout>
 </LinearLayout>

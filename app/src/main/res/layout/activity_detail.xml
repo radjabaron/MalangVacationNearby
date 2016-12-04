@@ -24,7 +24,6 @@
                 android:id="@+id/ivWisata"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@android:color/white"
                 android:fitsSystemWindows="true"
                 android:padding="0dp"
                 android:scaleType="centerCrop"
