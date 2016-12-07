@@ -28,6 +28,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -59,7 +60,7 @@ public class MainActivity extends FragmentActivity implements
 
     public static void animate(double latitude, double longitude) {
         LatLng latLng = new LatLng(latitude, longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
     }
 
     @Override
@@ -218,8 +219,10 @@ public class MainActivity extends FragmentActivity implements
         longitude = location.getLongitude();
         latitude = location.getLatitude();
         LatLng latLng = new LatLng(latitude, longitude);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.builder()
+                .target(latLng)
+                .zoom(15)
+                .build()));
     }
 
     @Override
