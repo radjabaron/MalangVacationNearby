@@ -2,15 +2,20 @@ package id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby;
 
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -50,6 +55,7 @@ public class MainActivity extends FragmentActivity implements
     public static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private static GoogleMap mMap;
     ImageView ivAbout;
+    EditText etSearch;
     RecyclerView rvWisata;
     ArrayList<Wisata> wisataList = new ArrayList<>();
     WisataAdapter wisataAdapter;
@@ -86,6 +92,7 @@ public class MainActivity extends FragmentActivity implements
 
 
         ivAbout = (ImageView) findViewById(R.id.ivAbout);
+        etSearch = (EditText) findViewById(R.id.etSearch);
         rvWisata = (RecyclerView) findViewById(R.id.rvWisata);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvWisata.setLayoutManager(layoutManager);
@@ -99,6 +106,37 @@ public class MainActivity extends FragmentActivity implements
                 startActivity(new Intent(MainActivity.this, AboutActivity.class));
             }
         });
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence query, int start, int before, int count) {
+                query = query.toString().toLowerCase();
+
+                final ArrayList<Wisata> filteredList = new ArrayList<>();
+
+                filteredList.clear();
+                for (int i = 0; i < wisataList.size(); i++) {
+                    final String text = wisataList.get(i).getNamaWisata().toLowerCase();
+                    if (text.contains(query)) {
+                        filteredList.add(new Wisata(wisataList.get(i).getNamaWisata(), wisataList.get(i).getDistance()));
+                    }
+
+                    rvWisata.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    wisataAdapter = new WisataAdapter(filteredList);
+                    rvWisata.setAdapter(wisataAdapter);
+                    wisataAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void initializeData() {
@@ -110,10 +148,20 @@ public class MainActivity extends FragmentActivity implements
                 for (DataSnapshot dataSnapshots : dataSnapshot.getChildren()) {
                     Map<String, Double> map = dataSnapshots.getValue(Map.class);
                     int distance = 0;
+                    if (ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
                     location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
                     Location locationFrom = new Location("From");
                     Location locationTo = new Location("To");
-                    if(location != null){
+                    if (location != null) {
 
                         Log.d("LOCATION", String.valueOf(location.getLatitude()));
                         Log.d("LOCATION", String.valueOf(location.getLongitude()));
@@ -190,12 +238,12 @@ public class MainActivity extends FragmentActivity implements
                 tvNoConnection.setVisibility(View.GONE);
                 for (DataSnapshot dataSnapshots : dataSnapshot.getChildren()) {
                     Map<String, Double> map = dataSnapshots.getValue(Map.class);
-                    try{
+                    try {
                         longitude = map.get("longitude");
                         latitude = map.get("latitude");
                         LatLng latLng = new LatLng(latitude, longitude);
                         mMap.addMarker(new MarkerOptions().position(latLng).title(String.valueOf(map.get("nama"))).icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_mvn3)));
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         continue;
                     }
 
@@ -212,6 +260,16 @@ public class MainActivity extends FragmentActivity implements
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         Log.i(TAG, "Location services connected.");
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         location = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
         if (location == null) {
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
@@ -222,6 +280,16 @@ public class MainActivity extends FragmentActivity implements
     }
 
     private void getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
 //        LatLng latLng = new LatLng(-7.966697, 112.632509);
