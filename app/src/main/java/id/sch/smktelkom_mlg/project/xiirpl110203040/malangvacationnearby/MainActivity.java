@@ -1,7 +1,9 @@
 package id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -43,6 +45,8 @@ import java.util.Comparator;
 import java.util.Map;
 
 import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.adapter.WisataAdapter;
+import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.appintro.Config;
+import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.appintro.DefaultIntro;
 import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.model.Wisata;
 
 public class MainActivity extends FragmentActivity implements
@@ -66,6 +70,7 @@ public class MainActivity extends FragmentActivity implements
     private double longitude;
     private double latitude;
 
+
     public static void animate(double latitude, double longitude) {
         LatLng latLng = new LatLng(latitude, longitude);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
@@ -76,6 +81,26 @@ public class MainActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                SharedPreferences sharedPreferences = getSharedPreferences(Config.FLAG, Context.MODE_PRIVATE);
+
+                if (sharedPreferences.getBoolean(Config.FLAG, true)) {
+                    startActivity(new Intent(MainActivity.this, DefaultIntro.class));
+
+                    SharedPreferences.Editor e = sharedPreferences.edit();
+
+                    e.putBoolean(Config.FLAG, false);
+
+                    e.apply();
+                }
+            }
+        });
+
+        thread.start();
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 

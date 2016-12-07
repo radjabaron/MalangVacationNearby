@@ -7,9 +7,8 @@
     android:orientation="vertical"
     android:weightSum="1"
     tools:context="id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.MainActivity">
-
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="0.4">
         <fragment
@@ -21,6 +20,8 @@
             android:id="@+id/ivAbout"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
             android:src="@drawable/about_icon"/>
 
         <android.support.design.widget.TextInputLayout
@@ -30,15 +31,17 @@
 
             <EditText
                 android:id="@+id/etSearch"
-                android:layout_width="300dp"
+                android:layout_width="265dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:hint="Search"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
 
     </RelativeLayout>
-        <TextView
+
+    <TextView
         android:id="@+id/tvNoConnection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
