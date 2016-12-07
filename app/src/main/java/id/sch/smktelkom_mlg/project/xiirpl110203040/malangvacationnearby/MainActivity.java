@@ -33,6 +33,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Map;
 
 import id.sch.smktelkom_mlg.project.xiirpl110203040.malangvacationnearby.adapter.WisataAdapter;
@@ -126,6 +128,15 @@ public class MainActivity extends FragmentActivity implements
                     String namaWisata = dataSnapshots.getKey();
                     wisataList.add(new Wisata(namaWisata, distance));
                 }
+                Collections.sort(wisataList, new Comparator<Wisata>() {
+                    @Override
+                    public int compare(Wisata wisata1, Wisata wisata2) {
+                        Integer dis1 = wisata1.distance;
+                        Integer dis2 = wisata2.distance;
+
+                        return dis1.compareTo(dis2);
+                    }
+                });
                 Log.d("LOCATION", "STOP");
                 wisataAdapter.notifyDataSetChanged();
             }
